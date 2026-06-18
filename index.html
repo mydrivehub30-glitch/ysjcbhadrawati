@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yashwantrao Shinde College | Enterprise Portal</title>
+    <!-- Premium Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-base: #040610; /* Ultra Deep Premium Tech Dark */
+            --bg-surface: #0a0d1e; /* High Contrast Sidebar */
+            --bg-glass: rgba(12, 16, 35, 0.85); /* Refined Translucent Panel */
+            --brand-orange: #FF4500; /* Electric Saffron Glow */
+            --brand-orange-glow: rgba(255, 69, 0, 0.35);
+            --brand-purple: #4B0082; /* Regal Purple Anchor */
+            --brand-gold: #FFD700; /* Imperial Gold Highlight */
+            --text-primary: #f8fafc; /* High Contrast Soft White */
+            --text-secondary: #94a3b8; /* Balanced Muted Grey */
+            --border-color: rgba(255, 69, 0, 0.2); 
+            --radius-main: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* STRICT NO-SCROLL BODY FOR SINGLE SCREEN EXPERIENCES */
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            height: 100vh;
+            max-height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* --- Left Side Sticky Sidebar Navigation Panel --- */
+        .sidebar {
+            width: 340px;
+            min-width: 340px;
+            background: var(--bg-surface);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            padding: 25px 15px;
+            box-shadow: 10px 0 40px rgba(0,0,0,0.6);
+        }
+
+        .college-brand {
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sanstha-title {
+            font-size: 0.72rem;
+            color: var(--brand-gold);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.2;
+            margin-bottom: 2px;
+        }
+
+        .college-logo-img {
+            width: 80px;
+            height: 80px;
+            filter: drop-shadow(0px 0px 12px rgba(255, 69, 0, 0.4));
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--brand-orange);
+        }
+
+        .college-brand h2 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 40%, var(--brand-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.3px;
+            text-transform: uppercase;
+            line-height: 1.4;
+            margin-top: 4px;
+        }
+
+        .college-brand p.slogan-text {
+            font-size: 0.68rem;
+            color: #a1a1aa;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            list-style: none;
+            overflow-y: auto;
+            flex: 1;
+            padding-right: 2px;
+        }
+
+        .nav-menu::-webkit-scrollbar { width: 3px; }
+        .nav-menu::-webkit-scrollbar-thumb { background: rgba(255,69,0,0.1); border-radius: 10px; }
+
+        .menu-tab-btn {
+            width: 100%;
+            padding: 11px 15px;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .menu-tab-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 69, 0, 0.05);
+            border-color: rgba(255, 69, 0, 0.1);
+            transform: translateX(3px);
+        }
+
+        .menu-tab-btn.active-tab {
+            color: #fff;
+            background: linear-gradient(135deg, #cc3700 0%, rgba(255, 69, 0, 0.15) 100%);
+            border-color: var(--brand-orange);
+            box-shadow: 0 4px 15px var(--brand-orange-glow);
+        }
+
+        /* --- Right Side Main Canvas Layout --- */
+        .wrapper-canvas {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            padding: 25px;
+            overflow: hidden;
+        }
+
+        /* --- Fixed Top Dashboard Header Banner --- */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            padding: 15px 25px;
+            border-radius: var(--radius-main);
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+            flex-shrink: 0;
+        }
+
+        .header-title h1 { font-size: 1.5rem; font-weight: 800; color: #fff; }
+        .header-title p { color: var(--text-secondary); font-size: 0.85rem; }
+
+        /* --- Content Windows Panel (Scroll Inner Area) --- */
+        .dynamic-scroll-container {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        .dynamic-scroll-container::-webkit-scrollbar { width: 5px; }
+        .dynamic-scroll-container::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
+
+        .view-panel {
+            display: none;
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .view-panel.active-panel { display: block; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- GRAND COMPACT POSTER BANNER --- */
+        .founder-grand-poster {
+            background: linear-gradient(135deg, #1f0802 0%, #080a1a 50%, #2a0b02 100%);
+            border: 2px solid var(--brand-orange);
+            border-radius: var(--radius-main);
+            padding: 25px 35px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(255, 65, 0, 0.2);
+            border-left: 6px solid var(--brand-gold);
+        }
+
+        .poster-wishes-details { flex: 1; max-width: 75%; }
+        .salutation-badge {
+            background: linear-gradient(90deg, var(--brand-orange), var(--brand-purple));
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            display: inline-flex;
+            margin-bottom: 12px;
+        }
+
+        .poster-wishes-details h2 { font-size: 2rem; color: #ffffff; font-weight: 900; }
+        .poster-wishes-details h2 span { color: var(--brand-gold); display: block; font-size: 1.1rem; font-weight: 700; margin-top: 4px; }
+        .marathi-message { color: #f1f5f9; font-size: 1.05rem; line-height: 1.6; border-left: 3px solid var(--brand-orange); padding-left: 15px; margin-top: 10px; }
+        .grand-founder-img { width: 140px; height: 165px; border-radius: var(--radius-main); object-fit: cover; border: 2.5px solid var(--brand-gold); }
+
+        /* --- Premium Cards Grid --- */
+        .grid-layout-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; }
+        .grid-layout-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+        .grid-layout-custom-home { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; margin-top: 10px; }
+
+        .glass-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-main);
+            padding: 25px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .glass-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: linear-gradient(to bottom, var(--brand-orange), var(--brand-purple));
+        }
+
+        .glass-card h2 { font-size: 1.3rem; margin-bottom: 15px; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .glass-card h2 i { color: var(--brand-orange); }
+        .glass-card p { color: var(--text-secondary); line-height: 1.7; font-size: 0.92rem; margin-bottom: 12px; }
+
+        .feature-list { list-style: none; }
+        .feature-list li { padding: 10px 14px; background: rgba(255, 255, 255, 0.01); margin-bottom: 8px; border-radius: 8px; border: 1px solid rgba(255, 69, 0, 0.08); display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
+        .feature-list li i { color: var(--brand-orange); }
+
+        .cyber-table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 15px; }
+        .cyber-table th, .cyber-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border-color); font-size: 0.88rem; }
+        .cyber-table th { background: rgba(255, 69, 0, 0.08); color: #fff; }
+        .cyber-table td { color: var(--text-secondary); }
+
+        .stat-capsule { background: rgba(255, 69, 0, 0.03); border: 1px solid rgba(255, 69, 0, 0.15); border-radius: 10px; padding: 15px; text-align: center; }
+        .stat-capsule h3 { font-size: 1.8rem; color: #fff; }
+        .stat-capsule h3 span { color: var(--brand-gold); }
+        .stat-capsule p { font-size: 0.8rem; margin: 0; }
+
+        .committee-selector {
+            background: var(--bg-surface);
+            color: #fff;
+            border: 1px solid var(--brand-orange);
+            padding: 10px 15px;
+            border-radius: 8px;
+            width: 100%;
+            margin-bottom: 20px;
+            font-weight: 600;
+            outline: none;
+        }
+
+        .committee-table-wrapper { display: none; }
+        .committee-table-wrapper.active-table-view { display: block; }
+
+        /* Bulletin Ticker Styling */
+        .bulletin-ticker-box {
+            background: rgba(255, 69, 0, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-main);
+            padding: 20px;
+        }
+        .ticker-item {
+            padding: 12px 10px;
+            border-bottom: 1px dashed rgba(255, 69, 0, 0.15);
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+        }
+        .ticker-item span {
+            color: var(--brand-orange);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .btn-trigger {
+            background: linear-gradient(135deg, var(--brand-orange) 0%, #d43b00 100%);
+            color: #fff; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer;
+        }
+
+        @media (max-width: 1024px) {
+            body { flex-direction: column; overflow-y: auto; height: auto; max-height: none; }
+            .sidebar { width: 100%; height: auto; }
+            .wrapper-canvas { margin-left: 0; width: 100%; height: auto; }
+            .founder-grand-poster { flex-direction: column-reverse; text-align: center; }
+            .poster-wishes-details { max-width: 100%; }
+            .grid-layout-custom-home { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Left Sticky Sidebar Control Panel -->
+    <aside class="sidebar">
+        <div class="college-brand">
+            <div class="sanstha-title">Bhadrawati Shikshan Sanstha, Bhadrawati</div>
+            <img src="YSJCC LOGO.jpg" alt="YSJCC Official Logo" class="college-logo-img">
+            <h2>Yeshwantrao Shinde Secondary & Higher Secondary School</h2>
+            <p class="slogan-text">To, Educate, Engage and Empower</p>
+        </div>
+        <ul class="nav-menu">
+            <li><button class="menu-tab-btn active-tab" onclick="toggleDashboard(event, 'panel-home')"><i class="fa-solid fa-house"></i> Home</button></li>
+            <li><button class="menu-tab-btn" onclick="toggleDashboard(event, 'panel-about')"><i class="fa-solid fa-address-card"></i> About College</button></li>
+            <li><button class="menu-tab-btn" onclick="toggleDashboard(event, 'panel-admin')"><i class="fa-solid fa-users-gear"></i> Administration & Committees</button></li>
+            <li><button class="menu-tab-btn" onclick="toggleDashboard(event, 'panel-staff')"><i class="fa-solid fa-user-graduate"></i> Streams & Courses</button></li>
+            <li><button class="menu-tab-btn" onclick="toggleDashboard(event, 'panel-facilities')"><i class="fa-solid fa-server"></i> Core Facilities</button></li>
+            <li><button class="menu-tab-btn" onclick="toggleDashboard(event, 'panel-admissions')"><i class="fa-solid fa-user-plus"></i> Admissions Desk</button></li>
+            <li><button class="menu-tab-btn" onclick="toggleDashboard(event, 'panel-scholarships')"><i class="fa-solid fa-hand-holding-dollar"></i> Scholarships</button></li>
+            <li><button class="menu-tab-btn" onclick="toggleDashboard(event, 'panel-support')"><i class="fa-solid fa-hands-holding"></i> Student Support</button></li>
+            <li><button class="menu-tab-btn" onclick="toggleDashboard(event, 'panel-activities')"><i class="fa-solid fa-square-rss"></i> Live Activities</button></li>
+            <li><button class="menu-tab-btn" onclick="toggleDashboard(event, 'panel-gallery')"><i class="fa-solid fa-photo-film"></i> Media Gallery</button></li>
+        </ul>
+    </aside>
+
+    <!-- Right Side Main Canvas Layout -->
+    <div class="wrapper-canvas">
+        
+        <!-- Top Fixed Bar Header -->
+        <header class="dashboard-header">
+            <div class="header-title">
+                <h1>Academic Gateway Panel</h1>
+                <p>Chichordi, Bhadrawati, Dist. Chandrapur | Accredited 'A' Grade</p>
+            </div>
+            <div>
+                <button onclick="toggleDashboard(event, 'panel-admissions')" class="btn-trigger"><i class="fa-solid fa-id-card"></i> Entry Link 2026</button>
+            </div>
+        </header>
+
+        <!-- Dynamic Internal Scroll View Panel Area -->
+        <div class="dynamic-scroll-container">
+
+            <!-- PANEL 1: HOME -->
+            <div id="panel-home" class="view-panel active-panel">
+                <!-- GRAND COMPACT POSTER BANNER FOR FOUNDER -->
+                <div class="founder-grand-poster">
+                    <div class="poster-wishes-details">
+                        <span class="salutation-badge"><i class="fa-solid fa-cake-candles"></i> जयंती निमित्त कोटी कोटी प्रणाम</span>
+                        <h2>स्व. श्री. निळकंठराव शिंदे <span>आदरणीय संस्थापक व प्रेरणास्थान</span></h2>
+                        <p class="marathi-message">आपल्या दूरदृष्टीतून आणि त्यागातून आपण ग्रामीण भागात शिक्षणाची ज्ञानगंगा आणली. आपल्या पवित्र स्मृतीस व शैक्षणिक क्रांतीस जयंती निमित्त विनम्र अभिवादन! 🙏✨</p>
+                    </div>
+                    <div class="poster-image-frame">
+                        <img src="KAI N SHINDE.jpg" alt="स्व. श्री. निळकंठराव शिंदे पोेстер" class="grand-founder-img">
+                    </div>
+                </div>
+
+                <div class="grid-layout-custom-home">
+                    <div>
+                        <div class="glass-card">
+                            <h2><i class="fa-solid fa-building-columns"></i> Welcome to the Main Academic Portal</h2>
+                            <p>Yeshwantrao Shinde Secondary & Higher Secondary School represents a supreme paradigm of scholastic growth, character building, and career orchestration across the Chandrapur district. Established under the stellar vision of Bhadrawati Shikshan Sanstha, the complex stands dedicated to delivering high-caliber educational streams with modern vocational frameworks.</p>
+                            <p>With an active historical background extending over 36 years of non-stop evaluation dominance, we constantly refine our parameters to prepare intermediate batches for competitive thresholds, techno-commercial challenges, and university entry frameworks.</p>
+                        </div>
+
+                        <div class="grid-layout-2" style="margin-top: 15px;">
+                            <div class="glass-card" style="margin-bottom:0;">
+                                <h3 style="color:#fff; font-size:1.1rem; margin-bottom:10px;"><i class="fa-solid fa-scroll-torah" style="color:var(--brand-orange); margin-right:8px;"></i> Educational Mission</h3>
+                                <p style="font-size:0.88rem;">To build comprehensive career matrices for rural student populations by lowering technical fee barriers and integrating high-tier professional guidance boards.</p>
+                            </div>
+                            <div class="glass-card" style="margin-bottom:0;">
+                                <h3 style="color:#fff; font-size:1.1rem; margin-bottom:10px;"><i class="fa-solid fa-user-shield" style="color:var(--brand-orange); margin-right:8px;"></i> Strict Monitoring Units</h3>
+                                <p style="font-size:0.88rem;">Operating constant campus safety monitoring units under specialized committees to oversee structural campus discipline and secure welfare protocols.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="bulletin-ticker-box">
+                            <h3 style="color:#fff; font-size:1.1rem; margin-bottom:15px; border-bottom:2px solid var(--brand-orange); padding-bottom:5px;"><i class="fa-solid fa-bullhorn" style="margin-right:8px;"></i> Live Bulletins</h3>
+                            <div class="ticker-item">
+                                <span>4 Main Streams Active</span> Now offering full tracks across Arts, Science, Commerce, and MCVC (Vocational Courses).
+                            </div>
+                            <div class="ticker-item">
+                                <span>Admissions 2026-27</span> Centralized online application rounds are currently operational on state pathways.
+                            </div>
+                            <div class="ticker-item">
+                                <span>Scholarship Deadlines</span> Mandated papers for community waivers must reach the help desk inside 15 days.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 2: ABOUT COLLEGE -->
+            <div id="panel-about" class="view-panel">
+                <div class="glass-card">
+                    <h2><i class="fa-solid fa-shield-cat"></i> Quality Parameters & Frameworks</h2>
+                    <p>Our operational loops sync seamlessly with the parameters directed by the School Quality Assessment & Assurance Framework (SQAAF).</p>
+                    <p>The system stands formally approved under the clean campus enterprise: <em>Chief Minister My School, Beautiful School Campaign (मुख्यमंत्री माझी शाळा, सुंदर शाळा अभियान)</em>.</p>
+                </div>
+            </div>
+
+            <!-- PANEL 3: ADMINISTRATION & COMMITTEES -->
+            <div id="panel-admin" class="view-panel">
+                <div class="glass-card">
+                    <h2><i class="fa-solid fa-users-gear"></i> Administration & Governing Panels</h2>
+                    <p>Select a committee board from the menu dropdown below to inspect the verified authority list directly translated from office banners:</p>
+                    
+                    <select class="committee-selector" onchange="filterCommitteeTable(this.value)">
+                        <option value="exec-body">1. Sanstha Executive Body (Bhadrawati Shikshan Sanstha)</option>
+                        <option value="school-committee">2. School Working Committee (शाळा समिती कार्यकारिणी)</option>
+                        <option value="women-committee">3. Women's Grievance Redressal Committee (महिला तक्रार निवारण समिती)</option>
+                        <option value="safety-committee">4. Student Safety & Facility Development Committee (विद्यार्थी सुरक्षा समिती)</option>
+                    </select>
+
+                    <!-- TABLES LOADED VIA COMMITTEE DROPDOWN SWITCHER -->
+                    <div id="table-exec-body" class="committee-table-wrapper active-table-view">
+                        <table class="cyber-table">
+                            <thead><tr><th>Sr.No.</th><th>Official Authority Name</th><th>Designation</th></tr></thead>
+                            <tbody>
+                                <tr><td>1</td><td>Dr. Vivek Nilkanthrao Shinde (M.B.B.S., M.S.)</td><td><strong>President</strong></td></tr>
+                                <tr><td>2</td><td>Dr. Kartik Nilkanthrao Shinde (M.Sc., Ph.D.)</td><td><strong>Secretary</strong></td></tr>
+                                <tr><td>3</td><td>Dr. Vishal Nilkanthrao Shinde (M.A., Ph.D.)</td><td><strong>Joint Secretary</strong></td></tr>
+                                <tr><td>4</td><td>Shri. Mohan S. Pusnake</td><td>Member</td></tr>
+                                <tr><td>5</td><td>Smt. Nilimatai Nilkanthrao Shinde</td><td>Member</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="table-school-committee" class="committee-table-wrapper">
+                        <table class="cyber-table">
+                            <thead><tr><th>Sr.No.</th><th>Member Name</th><th>Designation / Representation</th></tr></thead>
+                            <tbody>
+                                <tr><td>1</td><td>Dr. Kartik N. Shinde</td><td><strong>President</strong></td></tr>
+                                <tr><td>2</td><td>Dr. Sudhir M. Mote</td><td><strong>Secretary</strong></td></tr>
+                                <tr><td>3</td><td>Smt. Nilimatai N. Shinde</td><td>Member</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="table-women-committee" class="committee-table-wrapper">
+                        <table class="cyber-table">
+                            <thead><tr><th>Sr.No.</th><th>Committee Representative Name</th><th>Designation Position</th></tr></thead>
+                            <tbody>
+                                <tr><td>1</td><td>Sau. Ujjwala J. Wankhede</td><td><strong>President</strong></td></tr>
+                                <tr><td>2</td><td>Sau. Prema S. Potdukhe</td><td><strong>Vice-President</strong></td></tr>
+                                <tr><td>3</td><td>Ku. Pranita M. Bokade</td><td><strong>Secretary</strong></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="table-safety-committee" class="committee-table-wrapper">
+                        <table class="cyber-table">
+                            <thead><tr><th>Sr.No.</th><th>Member Name</th><th>Designation Domain</th></tr></thead>
+                            <tbody>
+                                <tr><td>1</td><td>Praful R. Chatki</td><td><strong>President / Corporator</strong></td></tr>
+                                <tr><td>2</td><td>Sau. Rekhatai B. Kutemate</td><td>Member (Local Authority)</td></tr>
+                                <tr><td>3</td><td>Dr. Vivek N. Shinde</td><td>Member (Doctor Representative)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 4: STREAMS & COURSES -->
+            <div id="panel-staff" class="view-panel">
+                <div class="glass-card">
+                    <h2><i class="fa-solid fa-chalkboard-user"></i> Detailed Stream Distribution (Std. 11th & 12th)</h2>
+                    <p>Our institution successfully operates 4 major specialized learning streams designed to meet diverse student career goals:</p>
+                </div>
+                <div class="grid-layout-2">
+                    <div class="glass-card">
+                        <h3>1. Faculty of ARTS</h3>
+                        <p>A comprehensive track focusing on civil services, humanities, and languages.</p>
+                        <ul class="feature-list">
+                            <li><i class="fa-solid fa-book"></i> Core Compulsory: English & Marathi / Hindi</li>
+                            <li><i class="fa-solid fa-landmark"></i> Political Science & History</li>
+                            <li><i class="fa-solid fa-chart-bar"></i> Economics & Sociology</li>
+                            <li><i class="fa-solid fa-leaf"></i> Environmental Science</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card">
+                        <h3>2. Faculty of SCIENCE</h3>
+                        <p>High-tech standard learning division for core engineering, medical, and technological domains.</p>
+                        <ul class="feature-list">
+                            <li><i class="fa-solid fa-flask"></i> <strong>General Science:</strong> Physics, Chemistry, Biology, Mathematics (60 Seats)</li>
+                            <li><i class="fa-solid fa-laptop-code"></i> <strong>Information Technology (IT):</strong> Modern alternative elective track (60 Seats)</li>
+                            <li><i class="fa-solid fa-microchip"></i> <strong>Computer Science:</strong> Bifurcated technical vocational engine (50 Seats)</li>
+                            <li><i class="fa-solid fa-bolt"></i> <strong>Electronics:</strong> Hardware system and peripherals management (50 Seats)</li>
+                            <li><i class="fa-solid fa-seedling"></i> <strong>Crop Science:</strong> Organic Grower & Irrigation techniques (50 Seats)</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card">
+                        <h3>3. Faculty of COMMERCE (English Medium)</h3>
+                        <p>Tailored explicitly for business administration, corporate management, chartered accounts, and banking loops.</p>
+                        <ul class="feature-list">
+                            <li><i class="fa-solid fa-calculator"></i> Book Keeping & Accountancy</li>
+                            <li><i class="fa-solid fa-sitemap"></i> Organization of Commerce (OC)</li>
+                            <li><i class="fa-solid fa-user-tie"></i> Secretarial Practice (SP) & Economics</li>
+                            <li><i class="fa-solid fa-language"></i> English, Marathi, & Environmental Studies</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card">
+                        <h3>4. Faculty of MCVC / HSCVC (Vocational)</h3>
+                        <p>Direct standalone professional employment modules guaranteeing financial self-reliance.</p>
+                        <ul class="feature-list">
+                            <li><i class="fa-solid fa-car"></i> <strong>Automobile Technology:</strong> Engine mechanics, body servicing, & wiring diagnostics. Renders direct entry right into 2nd year Polytechnic engineering!</li>
+                            <li><i class="fa-solid fa-wheat-awn"></i> <strong>Crop Science (Vocational):</strong> Advanced farming, agro-forestry, and seed management. Direct eligibility for state Gramsevak and Krisevak public posts.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 5: CORE FACILITIES -->
+            <div id="panel-facilities" class="view-panel">
+                <div class="grid-layout-3">
+                    <div class="glass-card">
+                        <h3><i class="fa-solid fa-network-wired"></i> Computer Labs</h3>
+                        <p>Configured with robust infrastructure layouts, complete CCTV tracking channels, and certified ICT centers.</p>
+                    </div>
+                    <div class="glass-card">
+                        <h3><i class="fa-solid fa-dumbbell"></i> Fitness & Athletics</h3>
+                        <p>Integrates a fully tailored modern physical fitness health club adjacent to a wide sports ground.</p>
+                    </div>
+                    <div class="glass-card">
+                        <h3><i class="fa-solid fa-person-military-pointing"></i> Mallakhamb Center</h3>
+                        <p>Formally managing the single premier stand-alone Mallakhamb Training Hub operational inside the whole taluka domain.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 6: ADMISSIONS DESK -->
+            <div id="panel-admissions" class="view-panel">
+                <div class="glass-card">
+                    <h2><i class="fa-solid fa-user-plus"></i> Online Entry Criteria & Stream Wise Fee Structure</h2>
+                    <p>All higher secondary candidate registration steps operate strictly through the government centralized portal line: <a href="https://mahafyjcadmissions.in" target="_blank" style="color:var(--brand-orange); font-weight:700;">mahafyjcadmissions.in</a>.</p>
+                    
+                    <table class="cyber-table">
+                        <thead>
+                            <tr>
+                                <th>Stream / Faculty Classification</th>
+                                <th>Mandatory Annual Fees</th>
+                                <th>Essential Documents for Physical Verification</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Faculty of Arts</strong></td>
+                                <td>Standard Govt. Grant Aided Scale</td>
+                                <td rowspan="4" style="line-height:1.7; color:var(--text-secondary);">
+                                    • Class 10th Original Board Marksheet<br>
+                                    • Original School Leaving Certificate (TC/LC)<br>
+                                    • Student Aadhaar Card Photocopy<br>
+                                    • 2 Recent Passport Size Photographs<br>
+                                    • Caste Certificate & Income Certificate (For waivers)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Faculty of General Science</strong></td>
+                                <td>₹ 310 /- Per Year</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Faculty of Commerce (English Medium)</strong></td>
+                                <td>₹ 3,240 /- Per Year</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Information Technology (IT Elective)</strong></td>
+                                <td>+ ₹ 1,200 /- Per Year Extra</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bifurcated Practical Science Labs</strong> (CS/Electronics/Crop)</td>
+                                <td>+ ₹ 5,000 /- Annual Lab Charge</td>
+                                <td>• Migration Certificate (Mandated only if outside Nagpur Board)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PANEL 7: SCHOLARSHIPS -->
+            <div id="panel-scholarships" class="view-panel">
+                <div class="glass-card">
+                    <h2><i class="fa-solid fa-hand-holding-dollar"></i> Concession & Welfare Schemes</h2>
+                    <p>Applications must be submitted within 15 days of securing entry metrics:</p>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-wallet"></i> <strong>Chhatrapati Shahu Maharaj Scholarship</strong> & Open Merit Concessions.</li>
+                        <li><i class="fa-solid fa-id-card"></i> <strong>Govt. of India SC, ST, OBC, SBC, VJNT</strong> Freeship operations.</li>
+                        <li><i class="fa-solid fa-bus"></i> <strong>Ahilyadevi Holkar Free Bus Facility</strong> run for female student blocks.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- PANEL 8: STUDENT SUPPORT -->
+            <div id="panel-support" class="view-panel">
+                <div class="glass-card">
+                    <h2><i class="fa-solid fa-hands-holding"></i> Career Placement cells</h2>
+                    <p>Guidance cells functional inside the complex premises:</p>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-book-bookmark"></i> <strong>Competitive Exam Study Circle:</strong> Provides systematic exam tracking loops.</li>
+                        <li><i class="fa-solid fa-users-line"></i> <strong>Alumni Association Cell:</strong> Annual collaborative meets arranged.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- PANEL 9: LIVE ACTIVITIES -->
+            <div id="panel-activities" class="view-panel">
+                <div class="glass-card">
+                    <h2><i class="fa-solid fa-shield-heart"></i> Extra-Curricular Milestones</h2>
+                    <ul class="feature-list">
+                        <li><strong>National Cadet Corps (NCC):</strong> Military field discipline camps actively training cadet blocks.</li>
+                        <li><strong>ISRO Scientific Exposure:</strong> Strategic student group entry into top science programs like "Space on Wheels".</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- PANEL 10: MEDIA GALLERY -->
+            <div id="panel-gallery" class="view-panel">
+                <div class="glass-card">
+                    <h2><i class="fa-solid fa-images"></i> Event Media Repositories</h2>
+                    <div class="grid-layout-3" style="margin-top:15px;">
+                        <div style="height:140px; background:rgba(255,255,255,0.02); border:1px dashed var(--border-color); display:flex; align-items:center; justify-content:center; color:var(--text-secondary);">[Campus Complex Frame]</div>
+                        <div style="height:140px; background:rgba(255,255,255,0.02); border:1px dashed var(--border-color); display:flex; align-items:center; justify-content:center; color:var(--text-secondary);">[ISRO Event Ceremony]</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Controller Logic -->
+    <script>
+        function toggleDashboard(event, targetPanelId) {
+            const panels = document.querySelectorAll('.view-panel');
+            panels.forEach(p => p.classList.remove('active-panel'));
+
+            const buttons = document.querySelectorAll('.menu-tab-btn');
+            buttons.forEach(b => b.classList.remove('active-tab'));
+
+            document.getElementById(targetPanelId).classList.add('active-panel');
+
+            if(event.currentTarget.classList.contains('menu-tab-btn')) {
+                event.currentTarget.classList.add('active-tab');
+            } else {
+                const idMap = ['panel-home', 'panel-about', 'panel-admin', 'panel-staff', 'panel-facilities', 'panel-admissions', 'panel-scholarships', 'panel-support', 'panel-activities', 'panel-gallery'];
+                const targetIdx = idMap.indexOf(targetPanelId);
+                if(targetIdx !== -1) {
+                    document.querySelectorAll('.menu-tab-btn')[targetIdx].classList.add('active-tab');
+                }
+            }
+        }
+
+        function filterCommitteeTable(selectedCommittee) {
+            const tables = document.querySelectorAll('.committee-table-wrapper');
+            tables.forEach(table => table.classList.remove('active-table-view'));
+            
+            document.getElementById('table-' + selectedCommittee).classList.add('active-table-view');
+        }
+    </script>
+</body>
+</html>
