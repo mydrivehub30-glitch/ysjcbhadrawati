@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yashwantrao Shinde College | Ultimate Comprehensive Portal</title>
-    <!-- Premium Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -86,6 +85,12 @@
         .media-player-frame { width: 100%; border-radius: 12px; border: 2px solid var(--brand-orange); overflow: hidden; box-shadow: 0 8px 20px rgba(255,69,0,0.25); background: #000; transform: translateZ(0); -webkit-transform: translateZ(0); }
         .media-player-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
 
+        /* --- PRINCIPAL FLEXBOX DESIGN --- */
+        .principal-flex-layout { display: flex; gap: 30px; align-items: flex-start; }
+        .principal-text-block { flex: 1; }
+        .principal-avatar-frame { width: 180px; min-width: 180px; height: 220px; border-radius: 15px; border: 3px solid var(--brand-orange); overflow: hidden; box-shadow: 0 10px 25px rgba(255, 69, 0, 0.3); background: #000; }
+        .principal-avatar-frame img { width: 100%; height: 100%; object-fit: cover; }
+
         /* --- STYLED TABLES & PANELS --- */
         .glass-card { background: var(--bg-glass); border: 1px solid var(--border-color); border-radius: var(--radius-main); padding: 30px; margin-bottom: 25px; position: relative; overflow: hidden; }
         .glass-card::before { content: ''; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: linear-gradient(to bottom, var(--brand-orange), var(--brand-purple)); }
@@ -116,6 +121,10 @@
         .committee-table-wrapper { display: none; }
         .committee-table-wrapper.active-table-view { display: block; }
 
+        /* Dynamic Grid Tweaks */
+        .grid-layout-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-layout-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 1024px) {
@@ -123,12 +132,13 @@
             .sidebar { width: 100%; height: auto; }
             .wrapper-canvas { width: 100%; height: auto; }
             .video-split-grid { grid-template-columns: 1fr; }
+            .principal-flex-layout { flex-direction: column-reverse; align-items: center; }
+            .grid-layout-2, .grid-layout-3 { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body class="lang-en"> 
 
-    <!-- Left Sticky Sidebar Control Panel -->
     <aside class="sidebar">
         <div class="college-brand">
             <div class="sanstha-title">Bhadrawati Shikshan Sanstha, Bhadrawati</div>
@@ -151,10 +161,8 @@
         </ul>
     </aside>
 
-    <!-- Right Side Main Canvas Layout -->
     <div class="wrapper-canvas">
         
-        <!-- MULTI-LANGUAGE NAVIGATION TAB BAR -->
         <div class="language-switcher-header">
             <button id="btn-lang-en" class="lang-toggle-btn active-lang" onclick="switchPortalLanguage('en')">English</button>
             <button id="btn-lang-mr" class="lang-toggle-btn" onclick="switchPortalLanguage('mr')">मराठी (Marathi)</button>
@@ -162,21 +170,18 @@
 
         <div class="dynamic-scroll-container">
 
-            <!-- ======================= TAB 1: HOME ======================= -->
             <div id="panel-home" class="view-panel active-panel">
-                <!-- FOUNDER GRAND POSTER -->
                 <div class="founder-grand-poster">
                     <div class="poster-wishes-details">
                         <div class="salutation-headline"><i class="fa-solid fa-cake-candles"></i> जयंती निमित्त कोटी कोटी प्रणाम</div>
                         <h2>स्व. श्री. निळकंठराव शिंदे <span>आदरणीय संस्थापक व प्रेरणास्थान</span></h2>
-                        <p class="marathi-message">"आपल्या दूरदृष्टीतून आणि त्यागातून आपण ग्रामीण भागात शिक्षणाची ज्ञानगंगा आणली. आपल्या पवित्र स्मृतीस व शैक्षणिक क्रांतीस विनम्र अभिवादन!" 🙏✨</p>
+                        <p class="marathi-message">"आपल्या दूरदृष्टीतून आणि त्यागातून आपण ग्रामीण भागात शिक्षणाची ज्ञानगंगा आणली. आपल्या पवित्र स्मृतीस व शैक्षणिक क्रांतिस विनम्र अभिवादन!" 🙏✨</p>
                     </div>
                     <div class="poster-image-frame">
                         <img src="KAI N SHINDE.jpg" alt="स्व. श्री. निळकंठराव शिंदे" class="grand-founder-img">
                     </div>
                 </div>
 
-                <!-- CAMPUS PHOTO BANNER -->
                 <div class="campus-fluid-poster">
                     <img src="COLLEGE1.jpg" alt="Yeshwantrao Shinde College Campus Celebration">
                     <div class="campus-poster-overlay">
@@ -187,7 +192,6 @@
                     </div>
                 </div>
 
-                <!-- SIDE-BY-SIDE DOUBLE VIDEOS -->
                 <div class="video-split-grid">
                     <div class="video-card-container">
                         <div class="media-player-frame">
@@ -228,15 +232,21 @@
                     </div>
                 </div>
 
-                <!-- PRINCIPAL DESK INSIDE HOME PREVIEW -->
                 <div class="glass-card" style="background: linear-gradient(135deg, rgba(14,17,34,0.95) 0%, rgba(255,69,0,0.08) 100%); border-color: rgba(255,69,0,0.35);">
                     <h2><i class="fa-solid fa-user-tie"></i> <span class="lang-en-text">Message from the Principal's Desk</span><span class="lang-mr-text">प्राचार्यांचे संदेश</span></h2>
-                    <h3 style="color:#fff; font-size:1.25rem;">Dr. Sudhir M. Mote (Ph.D.)</h3>
-                    <p style="font-style: italic; color:#e2e8f0; border-left: 3px solid var(--brand-orange); padding-left:15px;" class="lang-en-text">"Welcome to our unified academic terminal. Under the core frameworks dictated by Bhadrawati Shikshan Sanstha, we manage highly specialized authority systems to enforce standard operational safety, board discipline, and extensive vocational infrastructure loops."</p>
-                    <p style="font-style: italic; color:#e2e8f0; border-left: 3px solid var(--brand-orange); padding-left:15px;" class="lang-mr-text">"आमच्या एकत्रित शैक्षणिक पोर्टलवर आपले स्वागत आहे. भद्रावती शिक्षण संस्थेने निर्देशित केलेल्या मूळ चौकटींतर्गत, आम्ही मानक ऑपरेशनल सुरक्षा, संरचनात्मक board शिस्त आणि विस्तृत व्यावसायिक पायाभूत सुविधांचे व्यवस्थापन करतो."</p>
+                    
+                    <div class="principal-flex-layout">
+                        <div class="principal-text-block">
+                            <h3 style="color:#fff; font-size:1.25rem; margin-top:0; margin-bottom:15px;">Dr. Sudhir M. Mote (Ph.D.)</h3>
+                            <p style="font-style: italic; color:#e2e8f0; border-left: 3px solid var(--brand-orange); padding-left:15px;" class="lang-en-text">"Welcome to our unified academic terminal. Under the core frameworks dictated by Bhadrawati Shikshan Sanstha, we manage highly specialized authority systems to enforce standard operational safety, board discipline, and extensive vocational infrastructure loops."</p>
+                            <p style="font-style: italic; color:#e2e8f0; border-left: 3px solid var(--brand-orange); padding-left:15px;" class="lang-mr-text">"आमच्या एकत्रित शैक्षणिक पोर्टलवर आपले स्वागत आहे. भद्रावती शिक्षण संस्थेने निर्देशित केलेल्या मूळ चौकटींतर्गत, आम्ही मानक ऑपरेशनल सुरक्षा, संरचनात्मक board शिस्त आणि विस्तृत व्यावसायिक पायाभूत सुविधांचे व्यवस्थापन करतो."</p>
+                        </div>
+                        <div class="principal-avatar-frame">
+                            <img src="WhatsApp Image 2026-06-30 at 4.51.59 PM.jpeg" alt="Dr. Sudhir M. Mote - Principal">
+                        </div>
+                    </div>
                 </div>
 
-                <!-- MERITORIOUS STUDENT FELICITATION CARD PANEL -->
                 <div class="glass-card">
                     <h2><i class="fa-solid fa-award" style="color:var(--brand-gold);"></i> 
                         <span class="lang-en-text">Meritorious Student Felicitation Ceremony (Session 2025-26)</span>
@@ -261,7 +271,6 @@
                 </div>
             </div>
 
-            <!-- ======================= TAB 2: ABOUT COLLEGE ======================= -->
             <div id="panel-about" class="view-panel">
                 <div class="glass-card">
                     <h2><i class="fa-solid fa-graduation-cap"></i> <span class="lang-en-text">Institutional Legacy & Detailed History</span><span class="lang-mr-text">संस्थेचा गौरवशाली इतिहास व भव्य वारसा</span></h2>
@@ -275,7 +284,6 @@
                 </div>
             </div>
 
-            <!-- ======================= TAB 3: ADMINISTRATION & COMMITTEES (FULLY RESTORED) ======================= -->
             <div id="panel-admin" class="view-panel">
                 <div class="glass-card">
                     <h2><i class="fa-solid fa-users-gear"></i> <span class="lang-en-text">Administration & Governing Panels</span><span class="lang-mr-text">प्रशासकीय आणि नियामक मंडळ समित्या</span></h2>
@@ -340,7 +348,7 @@
                                 <tr><td>1</td><td>Shri. Praful R. Chatki</td><td><strong>President / Corporator (अध्यक्ष, नगरसेवक)</strong></td></tr>
                                 <tr><td>2</td><td>Sau. Rekhatai B. Kutemate</td><td>Member (Local Authority / स्थानिक प्राधिकरण सदस्य)</td></tr>
                                 <tr><td>3</td><td>Dr. Vivek N. Shinde</td><td>Member (Medical Representative / डॉक्टर सदस्य)</td></tr>
-                                <tr><td>4</td><td>Dr. Jayant A. Wankhede</td><td>Member (Education Expert /  विद्वान सदस्य)</td></tr>
+                                <tr><td>4</td><td>Dr. Jayant A. Wankhede</td><td>Member (Education Expert / विद्वान सदस्य)</td></tr>
                                 <tr><td>5</td><td>Shri. Kishor R. Dhoke</td><td>Member (Teacher / शिक्षक सदस्य)</td></tr>
                             </tbody>
                         </table>
@@ -348,7 +356,6 @@
                 </div>
             </div>
 
-            <!-- ======================= TAB 4: STREAMS & COURSES ======================= -->
             <div id="panel-staff" class="view-panel">
                 <div class="glass-card">
                     <h2><i class="fa-solid fa-chalkboard-user"></i> <span class="lang-en-text">Detailed Stream Distribution (Std. 11th & 12th)</span><span class="lang-mr-text">शाखा व अभ्यासक्रम सविस्तर रचना</span></h2>
@@ -388,7 +395,6 @@
                 </div>
             </div>
 
-            <!-- ======================= TAB 5: CORE FACILITIES ======================= -->
             <div id="panel-facilities" class="view-panel">
                 <div class="glass-card">
                     <h2><i class="fa-solid fa-server"></i> <span class="lang-en-text">Core Campus Infrastructure Workspaces</span><span class="lang-mr-text">कॅम्पस मुख्य सुविधा, प्रगत लॅब्स व तांत्रिक इन्फ्रास्ट्रक्चर</span></h2>
@@ -424,7 +430,6 @@
                 </div>
             </div>
 
-            <!-- ======================= TAB 6: ADMISSIONS DESK (EXTENDED) ======================= -->
             <div id="panel-admissions" class="view-panel">
                 <div class="glass-card">
                     <h2><i class="fa-solid fa-user-plus"></i> <span class="lang-en-text">Registration Channels & Official Fees</span><span class="lang-mr-text">प्रवेश प्रक्रिया निकष व अधिकृत सरकारी शुल्क तक्ता</span></h2>
@@ -449,7 +454,6 @@
                 </div>
             </div>
 
-            <!-- ======================= TAB 7: SCHOLARSHIPS (EXTENDED) ======================= -->
             <div id="panel-scholarships" class="view-panel">
                 <div class="glass-card">
                     <h2><i class="fa-solid fa-hand-holding-dollar"></i> <span class="lang-en-text">Government Scholarship Systems & Tuition Concessions</span><span class="lang-mr-text">शासकीय शिष्यवृत्ती योजना व मागासवर्गीय सवलती</span></h2>
@@ -461,12 +465,9 @@
                 </div>
             </div>
 
-            <!-- ======================= TAB 8: STUDENT SUPPORT (EXTENDED) ======================= -->
             <div id="panel-support" class="view-panel">
                 <div class="glass-card">
                     <h2><i class="fa-solid fa-hands-holding"></i> <span class="lang-en-text">Welfare Cells & Placement Guidance Circles</span><span class="lang-mr-text">विद्यार्थी सहाय्य, स्पर्धा परीक्षा मंच व करिअर कक्ष</span></h2>
-                    <p class="lang-en-text">Our campus orchestrates specialized advisory cells to back candidates during their competitive and techno-commercial journeys:</p>
-                    <p class="lang-mr-text">विद्यार्थ्यांना अभ्यासासोबतच योग्य करिअर दिशा देण्यासाठी कॅम्पसमध्ये विविध मंचांची रचना करण्यात आली आहे:</p>
                     <ul class="feature-list">
                         <li><i class="fa-solid fa-book-bookmark"></i> <strong>Competitive Exam Study Circle:</strong> Provides specialized reference books, periodic model question paper review tracking, and guest lecture configurations for candidates aiming at MPSC, UPSC, and banking tracks.</li>
                         <li><i class="fa-solid fa-users-line"></i> <strong>Alumni Placement Matrix Network:</strong> Conducts collaborative annual forums connecting graduating higher secondary classes with established alumni active across engineering, civil defense, and corporate sectors.</li>
@@ -474,11 +475,9 @@
                 </div>
             </div>
 
-            <!-- ======================= TAB 9: LIVE ACTIVITIES ======================= -->
             <div id="panel-activities" class="view-panel">
                 <div class="glass-card">
                     <h2><i class="fa-solid fa-square-rss"></i> <span class="lang-en-text">Extra-Curricular Milestones & Field Units</span><span class="lang-mr-text">थेट उपक्रम, राष्ट्रीय सेवा योजना, एनसीसी व भव्य विज्ञान प्रदर्शन</span></h2>
-                    <p class="lang-en-text">We reinforce deep civic duty, empirical innovation, and structural space science methodologies through active national frameworks:</p>
                 </div>
 
                 <div class="grid-layout-2">
@@ -520,7 +519,6 @@
                 </div>
             </div>
 
-            <!-- ======================= TAB 10: MEDIA GALLERY ======================= -->
             <div id="panel-gallery" class="view-panel">
                 <div class="glass-card">
                     <h2><i class="fa-solid fa-images"></i> <span class="lang-en-text">Event Media Archive Index</span><span class="lang-mr-text">चित्रदालन व पायाभूत सुविधा गॅलरी</span></h2>
@@ -542,7 +540,6 @@
         </div>
     </div>
 
-    <!-- JavaScript Controller Logic -->
     <script>
         function switchPortalLanguage(selectedLangCode) {
             if(selectedLangCode === 'en') {
